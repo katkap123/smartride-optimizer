@@ -1,34 +1,15 @@
+
 package com.smartride.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.Valid;
+
 public record Driver(
-        String id,
-        Location currentLocation,
-        int capacity,
-        long availableAtSeconds
-) {
-    public Driver {
-        if (id == null || id.isBlank()) {
-            throw new IllegalArgumentException(
-                    "Driver ID is required"
-            );
-        }
-
-        if (currentLocation == null) {
-            throw new IllegalArgumentException(
-                    "Driver location is required"
-            );
-        }
-
-        if (capacity <= 0) {
-            throw new IllegalArgumentException(
-                    "Driver capacity must be greater than zero"
-            );
-        }
-
-        if (availableAtSeconds < 0) {
-            throw new IllegalArgumentException(
-                    "Available time cannot be negative"
-            );
-        }
-    }
-}
+        @NotBlank String id,
+        @Valid @NotNull Location currentLocation,
+        @Positive int capacity,
+        @PositiveOrZero long availableAtSeconds
+) {}

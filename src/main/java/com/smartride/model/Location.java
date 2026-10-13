@@ -1,22 +1,17 @@
+
 package com.smartride.model;
 
-public record Location(
-        double latitude,
-        double longitude
-) {
-    public Location {
-        if (!Double.isFinite(latitude)
-                || latitude < -90 || latitude > 90) {
-            throw new IllegalArgumentException(
-                    "Invalid latitude"
-            );
-        }
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 
-        if (!Double.isFinite(longitude)
-                || longitude < -180 || longitude > 180) {
-            throw new IllegalArgumentException(
-                    "Invalid longitude"
-            );
-        }
-    }
-}
+public record Location(
+
+        @DecimalMin("-90.0")
+        @DecimalMax("90.0")
+        double latitude,
+
+        @DecimalMin("-180.0")
+        @DecimalMax("180.0")
+        double longitude
+
+) {}
